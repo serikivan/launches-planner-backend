@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="blue-section">
+        <div class="satelliteFlexRow">
+            <form action="{% url 'main_url' %}" method="get" id="search-form">
+                <input name="search" type="text" class="search-bar" value="{{ request.GET.search }}" placeholder="Введите название" autocomplete="off">
+            </form>
+            {% if data.basket_count > 0 %}
+                <a href="{% url 'basket_url' data.Basket_id %}" class="launches-button">
+                    ЗАПУСКИ
+                    <span class="basket-count">{{data.basket_count}}</span>
+                </a>
+            {% endif %}
+        </div>
+    </section>
+
+    <main class="page mainSection">
+            <div id="card-container" class="card-container">
+                    {% if data.orders %}
+                        {% for order in data.orders %}
+                            <a class="order_link" href="{% url 'sat_url' order.id %}">
+                                <div class="card">
+                                    <img class="card-img" src="{{ order.image }}" alt="{{ order.title }}">
+                                    <div class="card-title">{{ order.title }}</div>
+                                    <div class="card-description">{{ order.description }}</div>
+                                    <div class="card-weight">{{ order.weight }}</div>
+                                    <button class="card-button">Добавить</button>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p>Ничего не найдено.</p>
+                    {% endif %}
+            </div>
+    </main>
+{% endblock %}
