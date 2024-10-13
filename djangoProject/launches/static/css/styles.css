@@ -11,6 +11,14 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+a:link .card-title,
+a:visited .card-title,
+a:hover .card-title,
+a:active .card-title {
+    color: #2050A0;
+    text-decoration: none;
+}
+
 .headroom {
     background-color: #FFFFFF;
     padding: 20px;
@@ -19,6 +27,13 @@ body {
     font-size: 16px;
     margin-left: 0px;
     font-weight: normal;
+}
+
+.header-logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .blue-text {
@@ -75,16 +90,24 @@ body {
     background-color: white;
     color: #2050A0;
     padding: 10px 20px;
-    border-radius: 15px;
+    border-radius: 25px;
     border: 2px solid #2050A0;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .launches-button:hover {
-    background-color: #2050A0;
     border: 2px solid #e20036;
-    color: white;
+    color: #e20036;
+    cursor: pointer;
+}
+
+.launches-button-empty {
+    background-color: white;
+    color: #2050A0;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid #2050A0;
+    font-weight: bold;
 }
 
 .page {
@@ -106,7 +129,7 @@ body {
 
 .card {
     width: 280px;
-    height: 400px;
+    height: 430px;
     border: 1px solid #707173;
     border-radius: 20px;
     background-color: #FFFFFF;
@@ -118,8 +141,8 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-img {
@@ -234,6 +257,10 @@ body {
     margin-right: 20px;
 }
 
+.basket-card-title {
+    color: #2050A0;
+}
+
 .basket-content {
     flex-grow: 1;
     display: flex;
@@ -265,6 +292,7 @@ body {
 }
 
 .launch-date-section {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
 }
@@ -279,4 +307,13 @@ body {
     width: 250px;
     background-color: #f0f0f0;
     color: #000;
+}
+
+.orbit-input{
+    flex: 1;
+    padding: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
 }

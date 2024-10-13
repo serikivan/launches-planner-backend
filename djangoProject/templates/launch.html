@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="blue-section">
+        <div class="satelliteFlexRow">
+            <h1 class="page-header">
+                    <a class="blue-text"> ЗАПУСК {{data.launch.name}}</a>
+            </h1>
+        </div>
+    </section>
+    
+    <section class="launch-date-section">
+        <form>
+            <label for="launch_date">Дата запуска:</label>
+            <input name="date" type="text" class="orbit-input" value="{{ data.launch.launch_date }}" placeholder="yyyy-mm-dd" autocomplete="off"></input>
+        </form>
+    </section>
+    
+    <div class="basket-card-container">
+    {% for satellite, order in data.satellites_with_order %}
+        <div class="basket-card">
+            <img class="basket-card-img" src="{{satellite.image}}">
+            <div class="basket-content">
+                <div class="basket-card-title">{{satellite.title}}</div>
+                <div class="basket-card-description">{{satellite.orbit}}</div>
+                <div class="basket-card-weight">{{satellite.weight}}</div>
+                <div class="basket-card-weight">Ожидаемая дата запуска: до {{satellite.expected_date}}</div>
+                <div>
+                    <label class="basket-card-title" for="launch_order">Порядок вывода: </label>
+                    <input name="launch_order" type="text" class="orbit-input" value="{{ order }}" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

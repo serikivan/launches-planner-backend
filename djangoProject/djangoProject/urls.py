@@ -21,6 +21,6 @@ from launches import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.mainPage, name='main_url'),
-    path('basket/<int:id>', views.BasketCreator, name='basket_url'),
+    path('launch/<int:id>', views.LaunchesCreator, name='launch_url'),
     path('satellite/<int:id>', views.SatPage, name='sat_url'),
 ]
