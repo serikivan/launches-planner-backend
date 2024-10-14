@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="blue-section">
+        <div class="satelliteFlexRow">
+            <form action="{% url 'main_url' %}" method="get" id="search-form">
+                <input name="satname" type="text" class="search-bar" value="{{ request.GET.search }}" placeholder="Введите название" autocomplete="off">
+            </form>
+            {% if data.launchesSize > 0 %}
+                <a href="{% url 'launch_url' data.launch_id %}" class="launches-button">
+                    ЗАПУСК
+                    <span class="basket-count">{{data.launchesSize}}</span>
+                </a>
+                {% else %}
+                <a class="launches-button-empty">
+                    ЗАПУСК
+                    <span class="basket-count"> 0 </span>
+                </a>
+            {% endif %}
+        </div>
+    </section>
+
+    <main class="page mainSection">
+            <div id="card-container" class="card-container">
+                    {% if data.satellites %}
+                        {% for satellite in data.satellites %}
+                                <div class="card">
+                                    <a href="{% url 'sat_url' satellite.satellite_id %}">
+                                    <img class="card-img" src="{{ satellite.image_url }}" alt="{{ satellite.title }}">
+                                    <div class="card-title">{{ satellite.title }}</div>
+                                    <div class="card-description">Ожидание: до {{satellite.expected_date|date:"d.m.Y"}}</div>
+                                    <div class="card-weight">{{ satellite.weight }}</div>
+                                        </a>
+                                    <form action="{% url 'add_url' data.launch_id %}" method="post">
+                                        {% csrf_token %}
+                                            <input type="hidden" name="satellite_id" value="{{ satellite.satellite_id }}">
+                                        <button class="card-button">Добавить</button>
+                                    </form>
+                                </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>По запросу «{{ data.search }}» ничего не найдено.</p>
+                    {% endif %}
+            </div>
+    </main>
+{% endblock %}

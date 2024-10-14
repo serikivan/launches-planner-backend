@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="blue-section">
+        <div class="satelliteFlexRow">
+            <h1 class="page-header">
+                    <a class="blue-text"> ЗАПУСК №{{data.launch.launch_id}}</a>
+            </h1>
+        </div>
+    </section>
+    
+    <section class="launch-date-section">
+        <form>
+            <label for="launch_date">Ракета-носитель:</label>
+            <input name="date" type="text" class="orbit-input" value="{{data.launch.rocket}}" placeholder="DD.MM.YYYY" autocomplete="off"></input>
+            <label for="launch_date">Дата запуска:</label>
+            <input name="date" type="text" class="orbit-input" value="{{ data.launch.date|date:"d.m.Y" }}" placeholder="DD.MM.YYYY" autocomplete="off"></input>
+        </form>
+    </section>
+    <div class="basket-card-container">
+    {% for satellite, order in data.satellites_with_order %}
+        <div class="basket-card">
+            <img class="basket-card-img" src="{{satellite.image_url}}">
+            <div class="basket-content">
+                <div class="basket-card-title">{{satellite.title}}</div>
+                <div class="basket-card-description">{{satellite.orbit}}</div>
+                <div class="basket-card-weight">{{satellite.weight}}</div>
+                <div class="basket-card-weight">Ожидаемая дата запуска: до {{satellite.expected_date|date:"d.m.Y"}}</div>
+                <div>
+                    <label class="basket-card-title" for="launch_order">Порядок вывода: </label>
+                    <input name="launch_order" type="text" class="orbit-input" value="{{ order }}" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <section class="launch-status-section">
+    <form action="{% url 'delete_url' data.launch.launch_id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="card-button">Удалить запуск</button>
+    </form>
+</section>
+</div>
+
+{% endblock %}
